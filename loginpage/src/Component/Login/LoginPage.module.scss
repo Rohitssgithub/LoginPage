@@ -1,0 +1,146 @@
+
+.mainContainer{
+    overflow: hidden;
+    height: 100vh;
+    background-color: #fff;
+}
+button{
+    box-shadow: none !important;
+}
+*:focus{
+    outline: none;
+}
+
+.login{
+    height: 100vh;
+    width: 100%;
+    background-color: skyblue;
+}
+
+.logins{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loginDiv{
+    // border: solid 1px ;
+    box-shadow: 1px -2px 14px 0px rgba(0,0,0,0.75);
+-webkit-box-shadow: 1px -2px 14px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 1px -2px 14px 0px rgba(0,0,0,0.75);
+    padding: 20px;
+    width: 60%;
+    border-radius: 10px;
+}
+.inputGroup{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    
+    input{
+       padding: 10px; 
+    }
+}
+.needDiv{
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    font-weight: 600;
+
+    span{
+        cursor: pointer;
+    }
+}
+.btnDiv{
+margin-top: 20px;
+}
+
+/* Default button style */
+.rotate_border {
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.btn {
+    width: 180px;
+    height: 60px;
+    cursor: pointer;
+    background: #4F95DA;
+    border: 1px solid #91C9FF;
+    outline: none;
+    transition: 1s ease-in-out;
+    position: relative;
+    border: none !important;
+
+  }
+  
+  svg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    fill: none;
+    stroke: #fff;
+    stroke-dasharray: 150 480;
+    stroke-dashoffset: 150;
+    transition: 1s ease-in-out;
+  }
+  
+  .btn:hover {
+    transition: 1s ease-in-out;
+    background: #4F95DA;
+  }
+  
+  .btn:hover svg {
+    stroke-dashoffset: -480;
+  }
+  
+  .btn span {
+    color: white;
+    font-size: 18px;
+    font-weight: 100;
+  }
+
+
+  .otpReceiver{
+    text-align: center;
+  }
+
+
+
+.otp_field {
+    flex-direction: row;
+    column-gap: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .otp_field input {
+    height: 45px;
+    width: 42px;
+    border-radius: 6px;
+    outline: none;
+    font-size: 1.125rem;
+    text-align: center; 
+    border: 1px solid skyblue;
+  }
+  .otp_field input:focus {
+    outline: rgb(184, 125, 125) solid 1px;
+  }
+  .otp_field input::-webkit-inner-spin-button,
+  .otp_field input::-webkit-outer-spin-button {
+    display: none;
+  }
+  
+  .resend {
+    font-size: 12px;
+  }
+  
+ 

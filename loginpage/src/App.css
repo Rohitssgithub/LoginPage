@@ -1,0 +1,10 @@
+.main{
+    height: 200px;
+    width: 200px;
+    border: solid ;
+    border-radius: 50%;
+}
+.cla{
+    height: 20px;
+    background-color: blue;
+}
