@@ -26,12 +26,31 @@ const LoginPage = () => {
     })
 
 
+    // const handleInputChange = (e, index) => {
+    //     if (e.target.value) {
+    //         if (index < 5) {
+    //             inputRefs[index + 1].current.focus();
+    //         } else {
+    //             e.target.value = e.target.value.charAt(0);
+    //         }
+    //     } else {
+    //         if (index > 0) {
+    //             inputRefs[index - 1].current.focus();
+    //         }
+    //     }
+    // };
     const handleInputChange = (e, index) => {
-        if (e.target.value) {
-            if (index < 5) {
+        console.log('index', index)
+        const value = e.target.value;
+        console.log('value', value)
+        console.log('value.length', value.length)
+
+        if (value) {
+            if (value.length > 1) {
+                e.target.value = value.charAt(0);
+            }
+            if (index < inputRefs.length - 1) {
                 inputRefs[index + 1].current.focus();
-            } else {
-                e.target.value = e.target.value.charAt(0);
             }
         } else {
             if (index > 0) {
@@ -39,6 +58,7 @@ const LoginPage = () => {
             }
         }
     };
+
 
 
     const handleVerify = () => {
@@ -68,6 +88,21 @@ const LoginPage = () => {
         // alert()
     }
 
+
+    const handlePaste = (e, index) => {
+        console.log('e', e)
+        console.log('index', index)
+        const pastedText = e.clipboardData.getData('text');
+        const characters = pastedText.split('');
+
+        // Iterate through characters and fill the OTP input fields
+        characters.forEach((char, i) => {
+            if (i + index < inputRefs.length) {
+                inputRefs[i + index].current.value = char;
+            }
+        });
+    };
+
     return (
         <>
             <div className={styles.mainContainer}>
@@ -80,7 +115,7 @@ const LoginPage = () => {
                     <div className='col-6'>
                         <div className={styles.logins}>
                             <div className={styles.loginDiv}>
-                                <Formik
+                                {/* <Formik
                                     initialValues={{ email: '', password: '', confirmPassword: '' }}
                                     validationSchema={signupSchema}
                                     onSubmit={values => {
@@ -132,7 +167,7 @@ const LoginPage = () => {
 
                                         </Form>
                                     )}
-                                </Formik>
+                                </Formik> */}
                                 {/* <form onSubmit={handleSubmit}>
                                     <div className={styles.inputGroup}>
                                         <label>Username</label>
@@ -153,7 +188,7 @@ const LoginPage = () => {
                                     </div>
                                 </form> */}
 
-                                {/* <div className={styles.otpReceiver}>
+                                <div className={styles.otpReceiver}>
                                     <h4>Verify</h4>
                                     <p>Your code was sent to you via email</p>
 
@@ -165,16 +200,17 @@ const LoginPage = () => {
                                                 maxLength="1"
                                                 ref={inputRef}
                                                 onChange={(e) => handleInputChange(e, index)}
+                                                onPaste={(e) => handlePaste(e, index)} // Handle pasting
                                             />
                                         ))}
                                     </div>
-                                    <button className="btn btn-primary my-4" onClick={handleVerify}>
+                                    <button className="btn btn-danger my-4" onClick={handleVerify}>
                                         Verify
                                     </button>
                                     <p className={styles.resend}>
                                         Didn't receive code? <a href="">Request again</a>
                                     </p>
-                                </div> */}
+                                </div>
                             </div>
 
                         </div>
