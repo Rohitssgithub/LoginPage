@@ -4,7 +4,7 @@ import LoginPage from './Component/Login/LoginPage';
 import CaptchaGenerator from './Component/Captcha/Captcha';
 
 import { BrowserRouter, Route, Router } from 'react-router-dom';
-
+import ForwardRef from './Component/ForwardRef';
 const App = () => {
   return (
     <>
@@ -14,7 +14,8 @@ const App = () => {
         </Router>
       </BrowserRouter> */}
       {/* <CaptchaGenerator/> */}
-      <LoginPage></LoginPage>
+      <ForwardRef/>
+      {/* <LoginPage></LoginPage> */}
       {/* <div className='main'>
            <div className='cla'>
                       
