@@ -3,8 +3,6 @@ import styles from './LoginPage.module.scss'
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from "yup";
 import { GoogleLogin } from '@react-oauth/google';
-import { useGoogleLogin } from '@react-oauth/google';
-import GoogleButton from 'react-google-button'
 
 const LoginPage = () => {
     const inputRefs = Array(6).fill(null).map(() => useRef(null));
@@ -100,28 +98,7 @@ const LoginPage = () => {
         });
     };
 
-    const login = useGoogleLogin({
-        onSuccess: async response => {
-            console.log(response)
-            const data = await axios.get(GOOGLE_API_URL, {
-                headers: {
-                    "Authorization": `Bearer ${response.access_token}`
-                }
-            })
-            if (data.data.email_verified === true) {
-                localStorage.setItem('token', data.data.email)
-                closeModal()
-                setIsLogin(true)
-                setIsRegister(true)
-                navigate('/dashboard')
-                toast.success('Login Successful', { autoClose: 3000 })
-            }
-            else {
-                localStorage.removeItem('token')
-                toast.error('Invalid Username or Password')
-            }
-        }
-    });
+    
 
     return (
         <>
@@ -190,7 +167,6 @@ const LoginPage = () => {
                                         </Form>
                                     )}
                                 </Formik>
-                                <GoogleButton onClick={login} className="google-btn" />
 
                                 {/* <form onSubmit={handleSubmit}>
                                     <div className={styles.inputGroup}>
