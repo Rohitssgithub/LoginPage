@@ -63,8 +63,14 @@ const LoginPage = () => {
 
     const handleVerify = () => {
         const enteredOtp = inputRefs.map((ref) => ref.current.value).join('');
-        console.log('Entered OTP:', enteredOtp);
-        setOtp(enteredOtp);
+        if (enteredOtp.length === 0) {
+            alert('Please Enter OTP')
+        }
+        else {
+            console.log('Entered OTP:', enteredOtp);
+            setOtp(enteredOtp);
+        }
+
     };
 
     useEffect(() => {
@@ -84,18 +90,9 @@ const LoginPage = () => {
         };
     }, [charIndex, text, displayText]);
 
-    const handleSubmit = () => {
-        // alert()
-    }
-
-
     const handlePaste = (e, index) => {
-        console.log('e', e)
-        console.log('index', index)
         const pastedText = e.clipboardData.getData('text');
         const characters = pastedText.split('');
-
-        // Iterate through characters and fill the OTP input fields
         characters.forEach((char, i) => {
             if (i + index < inputRefs.length) {
                 inputRefs[i + index].current.value = char;
@@ -115,7 +112,11 @@ const LoginPage = () => {
                     <div className='col-6'>
                         <div className={styles.logins}>
                             <div className={styles.loginDiv}>
-                                {/* <Formik
+                                <div>
+                                    <i className={`${styles.iconPerson} bi bi-person-circle`}></i>
+                                    <div className={styles.extraDiv}></div>
+                                </div>
+                                <Formik
                                     initialValues={{ email: '', password: '', confirmPassword: '' }}
                                     validationSchema={signupSchema}
                                     onSubmit={values => {
@@ -125,8 +126,8 @@ const LoginPage = () => {
                                     {({ errors, touched, handleChange, handleSubmit, handleBlur, values }) => (
                                         <Form Form onSubmit={handleSubmit}>
 
-                                            <i className={`${styles.iconPerson} bi bi-person-circle`}></i>
-                                            <div className={styles.extraDiv}></div>
+                                            {/* <i className={`${styles.iconPerson} bi bi-person-circle`}></i>
+                                            <div className={styles.extraDiv}></div> */}
                                             <div className={styles.inputGroup}>
 
                                                 <label >Email address</label>
@@ -142,7 +143,7 @@ const LoginPage = () => {
                                                 <input type={pass ? 'text' : 'password'} value={values.password} name="password" placeholder='password' onChange={handleChange}
                                                     onBlur={handleBlur} className={`form-control inp ${errors.password && touched.password}`} />
 
-                                                <span className={styles.eyeSpan} onClick={()=>setPass(!pass)}>
+                                                <span className={styles.eyeSpan} onClick={() => setPass(!pass)}>
                                                     {
                                                         pass ? <i class="bi bi-eye-fill"></i> :
                                                             <i class="bi bi-eye-slash-fill"></i>
@@ -167,7 +168,7 @@ const LoginPage = () => {
 
                                         </Form>
                                     )}
-                                </Formik> */}
+                                </Formik>
                                 {/* <form onSubmit={handleSubmit}>
                                     <div className={styles.inputGroup}>
                                         <label>Username</label>
@@ -187,30 +188,109 @@ const LoginPage = () => {
                                         <button className={styles.rotate_border} type='submit'>Login</button>
                                     </div>
                                 </form> */}
+                                {/* <Formik
+                                    initialValues={{}}
+                                    validationSchema={signupSchema}
+                                    onSubmit={values => {
+                                        console.log('values', values)
+                                    }}
+                                >
+                                    {({ errors, touched, handleChange, handleSubmit, handleBlur, values }) => (
+                                        <Form Form onSubmit={handleSubmit}>
 
-                                <div className={styles.otpReceiver}>
-                                    <h4>Verify</h4>
-                                    <p>Your code was sent to you via email</p>
+                                            <div className={styles.otpReceiver}>
+                                                <h4>Verify</h4>
+                                                <p>Your code was sent to you via email</p>
 
-                                    <div className={styles.otp_field}>
-                                        {inputRefs.map((inputRef, index) => (
-                                            <input
-                                                key={index}
-                                                type="number"
-                                                maxLength="1"
-                                                ref={inputRef}
-                                                onChange={(e) => handleInputChange(e, index)}
-                                                onPaste={(e) => handlePaste(e, index)} // Handle pasting
-                                            />
-                                        ))}
-                                    </div>
-                                    <button className="btn btn-danger my-4" onClick={handleVerify}>
-                                        Verify
-                                    </button>
-                                    <p className={styles.resend}>
-                                        Didn't receive code? <a href="">Request again</a>
-                                    </p>
-                                </div>
+                                                <div className={styles.otp_field}>
+                                                    {inputRefs.map((inputRef, index) => (
+                                                        <>
+                                                            <input
+                                                                key={index}
+                                                                type="number"
+                                                                maxLength="1"
+                                                                ref={inputRef}
+                                                                onChange={(e) => handleInputChange(e, index)}
+                                                                onPaste={(e) => handlePaste(e, index)}
+                                                            />
+                                                        </>
+                                                    ))}
+                                                </div>
+                                                <button className="btn btn-danger my-4" onClick={handleVerify}>
+                                                    Verify
+                                                </button>
+                                                <p className={styles.resend}>
+                                                    Didn't receive code? <a href="">Request again</a>
+                                                </p>
+                                            </div>
+                                        </Form>
+                                    )}
+                                </Formik> */}
+
+
+                                {/* <Formik
+                                    initialValues={{ email: '' }}
+                                    validationSchema={signupSchema}
+                                    onSubmit={values => {
+                                        console.log('values', values)
+                                    }}
+                                >
+                                    {({ errors, touched, handleChange, handleSubmit, handleBlur, values }) => (
+                                        <Form Form onSubmit={handleSubmit}>
+
+
+                                            <div className={styles.emailSenderDiv}>
+                                                <h4>Email</h4>
+                                                <p>Your code was sent to you on this email</p>
+                                                <div className={styles.inputGroup}>
+
+                                                    <label >Email address</label>
+                                                    <input type='email' value={values.email} name="email" onChange={handleChange} onBlur={handleBlur} placeholder='email'
+                                                        id="floatingInput" className={`form-control  inp  ${errors.email && touched.email && 'is-invalid'}`} />
+                                                    {
+                                                        errors.email && touched.email ?
+                                                            <p className={styles.errorMessage}>{errors.email}</p> : null
+                                                    }
+                                                </div>
+                                            </div>
+                                            <button className='btn btn-danger px-4 w-100' type='submit'>Send OTP</button>
+
+                                        </Form>
+                                    )}
+                                </Formik> */}
+                                {/* <Formik
+                                    initialValues={{ password: '', confirmPassword: '' }}
+                                    validationSchema={signupSchema}
+                                    onSubmit={values => {
+                                        console.log('values', values)
+                                    }}
+                                >
+                                    {({ errors, touched, handleChange, handleSubmit, handleBlur, values }) => (
+                                        <Form Form onSubmit={handleSubmit}>
+                                            <div className={styles.emailSenderDiv}>
+                                                <div className={styles.inputGroup}>
+                                                    <label className='mb-1'>New Password</label>
+                                                    <input type='email' value={values.password} name="password" onChange={handleChange} onBlur={handleBlur} placeholder='Password'
+                                                        id="floatingInput" className={`form-control  inp  ${errors.password && touched.password && 'is-invalid'}`} />
+                                                    {
+                                                        errors.password && touched.password ?
+                                                            <p className={styles.errorMessage}>{errors.password}</p> : null
+                                                    }
+                                                </div>
+                                                <div className={styles.inputGroup}>
+                                                    <label className='mb-1'>Confirm Password</label>
+                                                    <input type='email' value={values.confirmPassword} name="confirmPassword" onChange={handleChange} onBlur={handleBlur} placeholder='Confirm Password'
+                                                        id="floatingInput" className={`form-control  inp  ${errors.confirmPassword && touched.confirmPassword && 'is-invalid'}`} />
+                                                    {
+                                                        errors.confirmPassword && touched.confirmPassword ?
+                                                            <p className={styles.errorMessage}>{errors.confirmPassword}</p> : null
+                                                    }
+                                                </div>
+                                            </div>
+                                            <button className='btn btn-danger px-4 w-100' type='submit'>Set Password</button>
+                                        </Form>
+                                    )}
+                                </Formik> */}
                             </div>
 
                         </div>

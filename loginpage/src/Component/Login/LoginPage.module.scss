@@ -4,6 +4,10 @@
     height: 100vh;
     background-color: #fff;
 }
+
+input{
+  box-shadow: none !important;
+}
 button{
     box-shadow: none !important;
 }
@@ -36,10 +40,6 @@ font-style: italic;
 
 .loginDiv{
   background-color: rgb(64, 38, 64);
-  
-//     box-shadow: 1px -2px 14px 0px rgba(0,0,0,0.75);
-// -webkit-box-shadow: 1px -2px 14px 0px rgba(0,0,0,0.75);
-// -moz-box-shadow: 1px -2px 14px 0px rgba(0,0,0,0.75);
     padding:30px 20px;
     width: 55%;
     border-radius: 10px;
@@ -53,9 +53,6 @@ font-style: italic;
       left: 50%;
       transform: translate(-50%);
       z-index: 6;
-      // background-color: white;
-      // border-radius: 50%;
-
     }
 
     .extraDiv{
@@ -163,11 +160,6 @@ margin-top: 20px;
     color: #fff;
   }
 
-
- 
-
-
-
 .otp_field {
     flex-direction: row;
     column-gap: 10px;
@@ -206,4 +198,14 @@ margin-top: 20px;
     font-size: 22px;
     right: 15px;
     color: black;
+  }
+  .emailInput{
+    width: 100%;
+       padding: 10px; 
+       border-radius: 5px;
+       border: solid 1px skyblue;
+  }
+
+  .emailSenderDiv{
+    color: white;
   }
