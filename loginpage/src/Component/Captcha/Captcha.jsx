@@ -4,13 +4,39 @@ const CaptchaGenerator = () => {
     const [captchaText, setCaptchaText] = useState(generateCaptchaText());
 
     function generateCaptchaText() {
-        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        const numbers = '0123456789';
+        const uppercaseLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const lowercaseLetters = 'abcdefghijklmnopqrstuvwxyz';
+
         let captcha = '';
-        for (let i = 0; i < 6; i++) {
-            const randomIndex = Math.floor(Math.random() * characters.length);
-            captcha += characters[randomIndex];
+        captcha += getRandomCharacter(numbers, 2);
+        captcha += getRandomCharacter(uppercaseLetters, 2);
+        captcha += getRandomCharacter(lowercaseLetters, 2);
+
+        // Shuffle the captcha text to randomize the order
+        captcha = shuffleString(captcha);
+
+        return captcha;
+    }
+
+    function getRandomCharacter(source, count) {
+        let result = '';
+        for (let i = 0; i < count; i++) {
+            const randomIndex = Math.floor(Math.random() * source.length);
+            result += source[randomIndex];
         }
-        return captcha.toUpperCase();
+        return result;
+    }
+
+    function shuffleString(string) {
+        console.log('string', string)
+        const array = string.split('');
+        console.log('array', array)
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array.join('');
     }
 
     const refreshCaptcha = () => {
@@ -22,7 +48,7 @@ const CaptchaGenerator = () => {
             <h2>CAPTCHA Generator</h2>
             <div className="captcha">
                 <div className="captcha-image">{captchaText}</div>
-                <button onClick={refreshCaptcha}>Refresh</button>
+                <button className='btn btn-danger' onClick={refreshCaptcha}>Refresh</button>
             </div>
         </div>
     );
