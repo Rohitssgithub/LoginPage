@@ -13,8 +13,8 @@ const App = () => {
           <Route path='/' element={<Home />} />
         </Router>
       </BrowserRouter> */}
-      <CaptchaGenerator/>
-      {/* <LoginPage></LoginPage> */}
+      {/* <CaptchaGenerator/> */}
+      <LoginPage></LoginPage>
       {/* <div className='main'>
            <div className='cla'>
                       
