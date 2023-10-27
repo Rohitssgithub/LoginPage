@@ -2,7 +2,6 @@ import React from 'react';
 import './App.css'
 import LoginPage from './Component/Login/LoginPage';
 
-
 import { BrowserRouter, Route, Router } from 'react-router-dom';
 
 const App = () => {
