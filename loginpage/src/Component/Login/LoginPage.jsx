@@ -125,9 +125,6 @@ const LoginPage = () => {
                                 >
                                     {({ errors, touched, handleChange, handleSubmit, handleBlur, values }) => (
                                         <Form Form onSubmit={handleSubmit}>
-
-                                            {/* <i className={`${styles.iconPerson} bi bi-person-circle`}></i>
-                                            <div className={styles.extraDiv}></div> */}
                                             <div className={styles.inputGroup}>
 
                                                 <label >Email address</label>
