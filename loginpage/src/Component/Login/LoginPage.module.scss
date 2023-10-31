@@ -189,7 +189,6 @@ margin-top: 20px;
 
   .otpReceiver{
     text-align: center;
-    // color: #fff;
   }
 
 .otp_field {
@@ -238,4 +237,7 @@ margin-top: 20px;
        border: solid 1px skyblue;
   }
 
- 
+ .error{
+  color: red;
+  font-size: 13px;
+ }

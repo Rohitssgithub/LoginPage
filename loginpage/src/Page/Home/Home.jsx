@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import styles from "./Graph.module.scss"
 import {
   Chart as ChartJS,
@@ -25,6 +25,8 @@ ChartJS.register(
 
 );
 const Graph = () => {
+  const inputRefs = Array(6).fill(null).map(() => useRef(null));
+  console.log(inputRefs)
   const [value, setValue] = useState(null)
   const [year, setYear] = useState([])
   const [obj, setObj] = useState(

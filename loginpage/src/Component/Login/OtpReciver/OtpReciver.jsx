@@ -1,22 +1,18 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useRef, useState, useEffect } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from "yup";
-import styles from '..//LoginPage.module.scss'
+import * as Yup from 'yup';
+import styles from '..//LoginPage.module.scss';
 import { Link, useNavigate } from 'react-router-dom';
 
-const OtpReciver = () => {
-    let navigate = useNavigate()
+const OtpReceiver = () => {
+
+    let [otp, setOtp] = useState(0)
+    let [error, setError] = useState(false)
+    let navigate = useNavigate();
     const inputRefs = Array(6).fill(null).map(() => useRef(null));
 
-    const signupSchema = Yup.object().shape({
-        email: Yup.string().email('Enter valid email').required("This field is required"),
-
-    })
     const handleInputChange = (e, index) => {
-        console.log('index', index)
         const value = e.target.value;
-        console.log('value', value)
-        console.log('value.length', value.length)
 
         if (value) {
             if (value.length > 1) {
@@ -25,22 +21,25 @@ const OtpReciver = () => {
             if (index < inputRefs.length - 1) {
                 inputRefs[index + 1].current.focus();
             }
-        } else {
+        }
+        else {
             if (index > 0) {
                 inputRefs[index - 1].current.focus();
             }
         }
+
     };
 
     const handleVerify = () => {
         const enteredOtp = inputRefs.map((ref) => ref.current.value).join('');
         if (enteredOtp.length === 6) {
             console.log('Entered OTP:', enteredOtp);
-            // setOtp(enteredOtp);
-            navigate('/new-password-generate')
-        }
-        else {
-            alert('Please Enter OTP')
+            setOtp(enteredOtp)
+            setError(false)
+            navigate('/new-password-generate');
+        } else {
+
+            setError(true)
 
         }
     };
@@ -54,48 +53,39 @@ const OtpReciver = () => {
             }
         });
     };
+
+    const isOtpInvalid = inputRefs.some((ref) => ref?.current?.value.length !== 1);
+
     return (
         <>
-            <Formik
-                initialValues={{}}
-                validationSchema={signupSchema}
-                onSubmit={values => {
-                    console.log('values', values)
-                }}
-            >
-                {({ errors, touched, handleChange, handleSubmit, handleBlur, values }) => (
-                    <Form Form onSubmit={handleSubmit}>
+            <div className={styles.otpReceiver}>
+                <h4>Verify</h4>
+                <p>Your code was sent to you via email</p>
 
-                        <div className={styles.otpReceiver}>
-                            <h4>Verify</h4>
-                            <p>Your code was sent to you via email</p>
-
-                            <div className={styles.otp_field}>
-                                {inputRefs.map((inputRef, index) => (
-                                    <>
-                                        <input
-                                            key={index}
-                                            type="number"
-                                            maxLength="1"
-                                            ref={inputRef}
-                                            onChange={(e) => handleInputChange(e, index)}
-                                            onPaste={(e) => handlePaste(e, index)}
-                                        />
-                                    </>
-                                ))}
-                            </div>
-                            <button className="btn btn-danger my-4" onClick={handleVerify}>
-                                Verify
-                            </button>
-                            <p className={styles.resend}>
-                                Didn't receive code? <Link to='/forget-password'>Request again</Link>
-                            </p>
-                        </div>
-                    </Form>
-                )}
-            </Formik>
+                <div className={styles.otp_field}>
+                    {inputRefs.map((inputRef, index) => (
+                        <input
+                            key={index}
+                            type="number"
+                            maxLength="1"
+                            ref={inputRef}
+                            onChange={(e) => handleInputChange(e, index)}
+                            onPaste={(e) => handlePaste(e, index)}
+                        />
+                    ))}
+                </div>
+                {error && <p className={styles.error}>Please enter a valid 6-digit OTP</p>}
+                <button className="btn btn-danger my-4" onClick={handleVerify}>
+                    Verify
+                </button>
+                <p className={styles.resend}>
+                    Didn't receive code? <Link to="/forget-password">Request again</Link>
+                </p>
+            </div>
         </>
-    )
-}
+    );
+};
 
-export default OtpReciver
+export default OtpReceiver;
+
+
