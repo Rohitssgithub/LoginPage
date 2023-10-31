@@ -24,18 +24,21 @@ const Sidebar = () => {
         setIsOpen(!isOpen);
     }
 
+    // State to track the currently open dropdown
     const [openDropdown, setOpenDropdown] = useState(null);
 
     const toggleSettingsDropdown = (pageName) => {
-        console.log('pageName', pageName)
-        // if (openDropdown === pageName) {
-        //     setOpenDropdown(null); 
-        // } else {
-            setOpenDropdown(pageName); 
-        // }
+        if (openDropdown === pageName) {
+            setOpenDropdown(null); // Close the dropdown if it's already open
+        } else {
+            setOpenDropdown(pageName); // Open the clicked dropdown
+        }
     }
 
-    console.log('openDropdown', openDropdown)
+    // Function to close the dropdown
+    const closeSettingsDropdown = () => {
+        setOpenDropdown(null);
+    }
 
     return (
         <>
@@ -69,7 +72,15 @@ const Sidebar = () => {
                                             {openDropdown === ele.pageName && (
                                                 <ul className="user-settings-dropdown">
                                                     {Object.values(ele.children).map((child) => (
-                                                        <Link className="linksDrop" to={child.path}>{child.pageName}</Link>
+                                                        <li key={child.path}>
+                                                            <Link
+                                                                className="linksDrop"
+                                                                to={child.path}
+                                                                onClick={closeSettingsDropdown}
+                                                            >
+                                                                {child.pageName}
+                                                            </Link>
+                                                        </li>
                                                     ))}
                                                 </ul>
                                             )}

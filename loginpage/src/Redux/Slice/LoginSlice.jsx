@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
 
 
 export const userLogin = createAsyncThunk("userLogin", async (data, { rejectWithValue }) => {
@@ -9,6 +10,7 @@ export const userLogin = createAsyncThunk("userLogin", async (data, { rejectWith
     });
     const userData = response.data;
     localStorage.setItem('userData', JSON.stringify(userData))
+    toast.success('Login Successfully')
     return userData;
 }
 );
