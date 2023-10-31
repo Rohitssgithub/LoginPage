@@ -4,6 +4,10 @@
 body {
     background-color: #e0e3e8;
 }
+li{
+    cursor: pointer;
+    text-decoration: none;
+}
 .text-primary{
   color: #5a8dee!important;
 }
@@ -91,4 +95,18 @@ body {
     text-transform: capitalize;
     line-height: 1;
     border-radius: 8px;
+}
+
+.user-settings-dropdown{
+    display: flex !important;
+    flex-direction: column !important;
+    transition: all 0.5s !important;
+    height: fit-content;
+
+    
+}
+.linksDrop{
+    transition: all 0.5s !important;
+    border: solid;
+    padding: 8px 20px;
 }
