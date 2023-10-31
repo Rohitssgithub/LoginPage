@@ -5,7 +5,7 @@ import { getToken } from '../utils';
 const PublicRoute = ({component: Component}) => {
     console.log(getToken())
   return (
-    !getToken() ? <Component/> : <Navigate to="/"/>
+    !getToken() ? <Component/> : <Navigate to="/home"/>
   )
 }
 

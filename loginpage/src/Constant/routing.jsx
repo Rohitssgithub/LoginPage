@@ -1,4 +1,4 @@
-import { createBrowserRouter, Navigate } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import LoginForm from "../Component/Login/LoginForm";
 import LoginLayout from "../Component/Login/LoginLayout";
 import RegisterForm from "../Component/RegistrationForm/RegisterForm";
@@ -9,22 +9,11 @@ import MainLayout from "../Page/MainLayout";
 import Home from "../Page/Home/Home";
 import About from "../Page/About/About";
 import PrivateRoute from "../auth/PrivateRoute";
+import PublicRoute from "../auth/PublicRoute";
 export const router = createBrowserRouter([
+
     {
-        element: <MainLayout />,
-        children: [
-            {
-                path: '/home',
-                element: <PrivateRoute component={Home} />
-            },
-            {
-                path: '/about',
-                element: <PrivateRoute component={About} />
-            },
-        ]
-    },
-    {
-        element: <LoginLayout />,
+        element: <PublicRoute component={LoginLayout} />,
         children: [
             {
                 path: '/login',
@@ -48,4 +37,18 @@ export const router = createBrowserRouter([
             },
         ]
     },
+    {
+        // path: '/',
+        element: <PrivateRoute component={MainLayout} />,
+        children: [
+            {
+                path: '/home',
+                element: <Home />
+            },
+            {
+                path: '/about',
+                element: <About />
+            },
+        ]
+    }
 ])

@@ -22,13 +22,16 @@ const LoginForm = () => {
             <Formik
                 initialValues={{ username: '', password: '', confirmPassword: '' }}
                 validationSchema={signupSchema}
-                onSubmit={(values, { resetForm }) => {
+                onSubmit={async (values, { resetForm }) => {
                     console.log('values', values)
-                    dispatch(userLogin(values))
-                    resetForm();
+                    console.log('values', values);
+                    await dispatch(userLogin(values));
+                    const isLoginSuccessful = true; // Replace with actual logic
+                    if (isLoginSuccessful) {
+                        // Redirect to the '/home' page
+                        navigate('/home');
+                    }
                     navigate('/home')
-
-
                 }}
             >
                 {({ errors, touched, handleChange, handleSubmit, handleBlur, values }) => (
