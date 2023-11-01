@@ -1,6 +1,7 @@
 
 import React, { useEffect, useState, useRef } from 'react'
-import styles from "./Graph.module.scss"
+import styles from "./Graph.module.scss";
+import CameraComponent from '../../Component/camera/Camera';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -21,8 +22,6 @@ ChartJS.register(
   Legend,
   Tooltip,
   Title,
-
-
 );
 const Graph = () => {
   const inputRefs = Array(6).fill(null).map(() => useRef(null));
@@ -365,103 +364,105 @@ const Graph = () => {
     setValue(data)
   }, [])
   return (
-    <div>
-      <div className={styles.graph}>
-        <div>
-          {value && (
-            <Line data={value} options={options} />
-          )}
-        </div>
+    <>
+      <CameraComponent />
+      <div>
+        <div className={styles.graph}>
+          <div>
+            {value && (
+              <Line data={value} options={options} />
+            )}
+          </div>
 
-        <div>
-          <table className={styles.custom_table}>
-            <thead>
-              <tr>
-                <th className={styles.bordered_cell}>Month</th>
-                {uniqueYears.map(year => <th key={year}>{year}</th>)}
-              </tr>
-            </thead>
-            <tbody>
-              {uniqueMonths.map(month => (
-                <tr key={month}>
-                  <td className={styles.bordered_cell}>{month}</td>
-                  {uniqueYears.map(year => (
-                    <td key={year} className={styles.bordered_cell}>
-                      {obj.month_table_data[year].find(data => data.month === month)?.value || ''}
-                    </td>
+          <div>
+            <table className={styles.custom_table}>
+              <thead>
+                <tr>
+                  <th className={styles.bordered_cell}>Month</th>
+                  {uniqueYears.map(year => <th key={year}>{year}</th>)}
+                </tr>
+              </thead>
+              <tbody>
+                {uniqueMonths.map(month => (
+                  <tr key={month}>
+                    <td className={styles.bordered_cell}>{month}</td>
+                    {uniqueYears.map(year => (
+                      <td key={year} className={styles.bordered_cell}>
+                        {obj.month_table_data[year].find(data => data.month === month)?.value || ''}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div>
+            <table className={styles.custom_table}>
+              <thead>
+                <tr>
+                  {headers.map(header => (
+                    <th key={header} className={styles.bordered_cell}>{header}</th>
                   ))}
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <div>
-          <table className={styles.custom_table}>
+              </thead>
+              <tbody>
+                {obj.year_table_data.map((yearData, index) => (
+                  <tr key={index}>
+                    {headers.map(header => (
+                      <td key={header} className={styles.bordered_cell}>
+                        {yearData[header] || ''}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <div> <table className={styles.custom_table}>
             <thead>
               <tr>
-                {headers.map(header => (
+                {table1Keys.map(header => (
                   <th key={header} className={styles.bordered_cell}>{header}</th>
                 ))}
               </tr>
             </thead>
             <tbody>
-              {obj.year_table_data.map((yearData, index) => (
-                <tr key={index}>
-                  {headers.map(header => (
-                    <td key={header} className={styles.bordered_cell}>
-                      {yearData[header] || ''}
-                    </td>
-                  ))}
-                </tr>
-              ))}
+              <tr>
+                {
+                  table1Keys.map((header) => {
+                    return <td className={styles.bordered_cell}>{obj.stock_statistics[header]}</td>
+                  })
+                }
+              </tr>
             </tbody>
           </table>
+          </div>
+
+          <div> <table className={styles.custom_table}>
+            <thead>
+              <tr>
+                {table2Keys.map(header => (
+                  <th key={header} className={styles.bordered_cell}>{header}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                {
+                  table2Keys.map((header) => {
+                    return <td className={styles.bordered_cell}>{obj.stock_statistics[header]}</td>
+                  })
+                }
+              </tr>
+
+            </tbody>
+          </table>
+          </div>
         </div>
+      </div >
+    </>
 
-        <div> <table className={styles.custom_table}>
-          <thead>
-            <tr>
-              {table1Keys.map(header => (
-                <th key={header} className={styles.bordered_cell}>{header}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              {
-                table1Keys.map((header) => {
-                  return <td className={styles.bordered_cell}>{obj.stock_statistics[header]}</td>
-                })
-              }
-            </tr>
-          </tbody>
-        </table>
-        </div>
-
-        <div> <table className={styles.custom_table}>
-          <thead>
-            <tr>
-              {table2Keys.map(header => (
-                <th key={header} className={styles.bordered_cell}>{header}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              {
-                table2Keys.map((header) => {
-                  return <td className={styles.bordered_cell}>{obj.stock_statistics[header]}</td>
-                })
-              }
-            </tr>
-
-          </tbody>
-        </table>
-        </div>
-      </div>
-
-
-    </div >
   )
 }
 
