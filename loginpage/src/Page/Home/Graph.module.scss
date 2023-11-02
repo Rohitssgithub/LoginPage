@@ -2,6 +2,7 @@ custom_table {
     border-collapse: collapse;
     width: 100%;
     text-align: center;
+    border: solid !important;
 }
 
 .custom_table .bordered_cell {
@@ -18,4 +19,10 @@ custom_table {
     flex-direction: column;
     gap: 50px;
     padding: 50px;
+}
+
+.maincsss{
+    border: solid !important;
+    width: 50vw !important;
+    height: 70% !important;
 }

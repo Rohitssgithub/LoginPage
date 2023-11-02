@@ -370,7 +370,7 @@ const Graph = () => {
         <div className={styles.graph}>
           <div>
             {value && (
-              <Line data={value} options={options} />
+              <Line data={value} options={options} className={styles.maincsss} />
             )}
           </div>
 
