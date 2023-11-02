@@ -1,10 +1,12 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
 import styles from '..//LoginPage.module.scss';
 import { Link, useNavigate } from 'react-router-dom';
+import { verifyLoginOtp } from '../../../Redux/Slice/LoginSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 const OtpReceiver = () => {
+
+    let dispatch = useDispatch()
 
     let [otp, setOtp] = useState(0)
     let [error, setError] = useState(false)
@@ -36,9 +38,9 @@ const OtpReceiver = () => {
             console.log('Entered OTP:', enteredOtp);
             setOtp(enteredOtp)
             setError(false)
-            navigate('/new-password-generate');
+            dispatch(verifyLoginOtp(otp))
+            navigate('/home');
         } else {
-
             setError(true)
 
         }

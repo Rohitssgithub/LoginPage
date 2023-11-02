@@ -1,19 +1,33 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
+import { httpRequest } from '../../apiservices';
 import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
-
 
 export const userLogin = createAsyncThunk("userLogin", async (data, { rejectWithValue }) => {
-    const response = await axios.post("https://dummyjson.com/auth/login", {
-        username: data.username,
-        password: data.password
+    console.log('data', data)
+    console.log(httpRequest)
+    const response = await axios.post("https://freedomthroughschool-qa.nimapinfotech.com/api/auth/send-otp", {
+        // username: data.username,
+        // password: data.password
+        emailId: data.email
     });
     const userData = response.data;
-    localStorage.setItem('userData', JSON.stringify(userData))
-    toast.success('Login Successfully')
+    // localStorage.setItem('userData', JSON.stringify(userData))
+    // toast.success('Login Successfully')
     return userData;
-}
-);
+});
+
+export const verifyLoginOtp = createAsyncThunk("verify/otp", async (data, { rejectWithValue }) => {
+    console.log('data', data)
+    console.log(httpRequest)
+    const response = await axios.post("https://freedomthroughschool-qa.nimapinfotech.com/api/auth/verify-otp", {
+        otp: data
+    });
+    const userData = response.data;
+    // localStorage.setItem('userData', JSON.stringify(userData))
+    return userData;
+});
+
 
 const loginReducer = createSlice({
     name: 'login',
