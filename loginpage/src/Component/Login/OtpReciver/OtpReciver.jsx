@@ -130,15 +130,29 @@ const OtpReceiver = () => {
         }
     };
 
-    const handleVerify = () => {
+    let userData;
+    const getToken = () => {
+        const userDataString = localStorage.getItem('email');
+        userData = JSON.parse(userDataString);
+        return userData
+    }
+    const handleVerify = async () => {
         const enteredOtp = inputRefs.map((ref) => ref.current.value).join('');
         if (enteredOtp.length === 6) {
             console.log('Entered OTP:', enteredOtp);
+            getToken()
             setOtp(enteredOtp);
             setError(false);
-            dispatch(verifyLoginOtp(otp));
+
+            let payload = {
+                emailId: userData,
+                otp: otp
+            }
+            dispatch(verifyLoginOtp(payload));
             navigate('/home');
-        } else {
+        }
+
+        else {
             setError(true);
         }
     };
@@ -157,14 +171,20 @@ const OtpReceiver = () => {
         setOtp(loginUser.otp)
     }, [loginUser])
 
-    useEffect(() => {
+    // useEffect(() => {
+    //     inputRefs.forEach((ref, index) => {
+    //         ref.current.value = otp?.charAt(index) || '';
+    //     });
+    // }, [otp]);
+
+
+    const autoRead = () => {
         inputRefs.forEach((ref, index) => {
             ref.current.value = otp?.charAt(index) || '';
         });
-    }, [otp]);
+    }
 
     console.log('otp', otp)
-
     return (
         <>
             <div className={styles.otpReceiver}>
@@ -190,6 +210,7 @@ const OtpReceiver = () => {
                 <p className={styles.resend}>
                     Didn't receive code? <Link to="/forget-password">Request again</Link>
                 </p>
+                <button className='btn btn-danger' onClick={autoRead}>auto read</button>
             </div>
         </>
     );

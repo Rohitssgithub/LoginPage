@@ -48,7 +48,7 @@ export const router = createBrowserRouter([
         ]
     },
     {
-        element: <PrivateRoute component={MainLayout} />,
+        element: <MainLayout/>,
         children: [
             {
                 path: '/home',

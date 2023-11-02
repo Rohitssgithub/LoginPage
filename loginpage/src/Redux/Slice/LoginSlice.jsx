@@ -4,16 +4,14 @@ import { httpRequest } from '../../apiservices';
 import axios from 'axios';
 
 export const userLogin = createAsyncThunk("userLogin", async (data, { rejectWithValue }) => {
+    localStorage.setItem('email', JSON.stringify(data.email))
     try {
-        console.log('data', data)
-        console.log(httpRequest)
         const response = await axios.post("https://freedomthroughschool-qa.nimapinfotech.com/api/auth/send-otp", {
             // username: data.username,
             // password: data.password
             emailId: data.email
         });
         const userData = response.data;
-        console.log(userData)
         // localStorage.setItem('userData', JSON.stringify(userData))
         toast.success('OTP send successfully')
         return userData;
@@ -25,14 +23,15 @@ export const userLogin = createAsyncThunk("userLogin", async (data, { rejectWith
 });
 
 export const verifyLoginOtp = createAsyncThunk("verify/otp", async (data, { rejectWithValue }) => {
+    console.log('data', data)
     try {
         console.log('data', data)
-        console.log(httpRequest)
         const response = await axios.post("https://freedomthroughschool-qa.nimapinfotech.com/api/auth/verify-otp", {
-            otp: data
+            emailId: data.emailId,
+            otp: data.otp
         });
+        console.log('response', response)
         const userData = response.data;
-        // localStorage.setItem('userData', JSON.stringify(userData))
         return userData;
     }
     catch (err) {
