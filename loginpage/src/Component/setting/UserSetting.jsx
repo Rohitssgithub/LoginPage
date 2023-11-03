@@ -31,7 +31,7 @@ const UserSetting = () => {
         onInputChange={handleInputChange}
         isClearable
         isSearchable
-        menuIsOpen={menuIsOpen} // Control whether the menu is open or closed
+        menuIsOpen={menuIsOpen} 
         placeholder="Select an option..."
       />
       {selectedOption && (
