@@ -2,7 +2,13 @@ import React from 'react'
 
 const UserSettings = () => {
   return (
-    <div>UserSetting</div>
+    <>
+
+
+      {/* <div>s
+        <input type="search" />
+      </div> */}
+    </>
   )
 }
 
