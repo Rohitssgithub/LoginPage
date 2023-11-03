@@ -17,7 +17,7 @@ const UserSetting = () => {
 
   const handleInputChange = (inputValue) => {
     if (inputValue) {
-      setMenuIsOpen(true); 
+      setMenuIsOpen(true);
       setMenuIsOpen(false);
     }
   };
