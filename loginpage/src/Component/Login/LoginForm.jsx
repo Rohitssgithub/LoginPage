@@ -8,7 +8,6 @@ import { useDispatch } from 'react-redux';
 const LoginForm = () => {
     let navigate = useNavigate()
     let dispatch = useDispatch()
-    let [pass, setPass] = useState(false)
     const signupSchema = Yup.object().shape({
         email: Yup.string().required("This field is required"),
         // password: Yup.string().min(8, 'Minimun character should be 8').required("This field is required"),

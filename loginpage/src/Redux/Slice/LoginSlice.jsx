@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
-import { httpRequest } from '../../apiservices';
 import axios from 'axios';
 
 export const userLogin = createAsyncThunk("userLogin", async (data, { rejectWithValue }) => {
@@ -21,6 +20,7 @@ export const userLogin = createAsyncThunk("userLogin", async (data, { rejectWith
         toast.error('User Not Found')
     }
 });
+
 
 export const verifyLoginOtp = createAsyncThunk("verify/otp", async (data, { rejectWithValue }) => {
     console.log('data', data)
