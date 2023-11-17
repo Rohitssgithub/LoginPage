@@ -115,7 +115,6 @@ const OtpReceiver = () => {
 
     const handleInputChange = (e, index) => {
         const value = e.target.value;
-
         if (value) {
             if (value.length > 1) {
                 e.target.value = value.charAt(0);
@@ -158,8 +157,12 @@ const OtpReceiver = () => {
     };
 
     const handlePaste = (e, index) => {
+        console.log('e', e)
+        console.log('index', index)
         const pastedText = e.clipboardData.getData('text');
+        console.log('pastedText', pastedText)
         const characters = pastedText.split('');
+        console.log('characters', characters)
         characters.forEach((char, i) => {
             if (i + index < inputRefs.length) {
                 inputRefs[i + index].current.value = char;

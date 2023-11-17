@@ -4,6 +4,7 @@ import { Outlet } from 'react-router-dom';
 const Setting = () => {
     return (
         <>
+            <p>setting page</p>
             <Outlet></Outlet>
         </>
     )

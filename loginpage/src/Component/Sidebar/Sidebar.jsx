@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import './Sidebar.css'
 import { Link, useLocation } from "react-router-dom";
 import { MAIN_PATH } from "../../Constant/Constant";
-
+import { sideBarNavigation } from "./Navigation";
+import { NavLink } from "react-router-dom";
 const Sidebar = () => {
     const [currentPath, setCurrentPath] = useState({});
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -24,7 +25,6 @@ const Sidebar = () => {
         setIsOpen(!isOpen);
     }
 
-    // State to track the currently open dropdown
     const [openDropdown, setOpenDropdown] = useState(null);
 
     const toggleSettingsDropdown = (pageName) => {
@@ -59,7 +59,7 @@ const Sidebar = () => {
                     </div>
                     <div className="sd-body">
                         <ul>
-                            {Object.values(MAIN_PATH).map((ele) => {
+                            {/* {Object.values(MAIN_PATH).map((ele) => {
                                 if (ele.children) {
                                     return (
                                         <li key={ele.path} className="innerLink">
@@ -82,6 +82,7 @@ const Sidebar = () => {
                                                             </Link>
                                                         </li>
                                                     ))}
+                                                  
                                                 </ul>
                                             )}
                                         </li>
@@ -93,7 +94,27 @@ const Sidebar = () => {
                                         </li>
                                     );
                                 }
-                            })}
+                            })} */}
+                            {sideBarNavigation
+                                .map((data) => {
+                                    return (
+                                        <>
+                                            <NavLink
+                                                key={data.id}
+                                                to={data.path}
+                                                state={{ previousPath: location.pathname }}
+                                            >
+                                                <div>
+                                                    <p>{data.pageName}</p>
+                                                    <i
+                                                        className="fa-solid fa-arrow-right"
+                                                    ></i>
+                                                </div>
+                                            </NavLink>
+                                        </>
+                                    )
+                                })
+                            }
                             <Link className='mainLinkNav' onClick={() => localStorage.clear()} to='/login'>Logout</Link>
                         </ul>
                     </div>
