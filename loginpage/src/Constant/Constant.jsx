@@ -5,10 +5,10 @@ import OtpReceiver from "../Component/Login/OtpReciver/OtpReciver";
 import NewPassword from "../Component/Login/NewPassowrd/NewPassword";
 import Home from "../Page/Home/Home"
 import About from "../Page/About/About";
-import UserSetting from "../Component/setting/UserSetting";
 import Setting from "../Component/setting/Setting";
 import UserProfile from "../Component/User/UserProfile";
 import SingleMoviePage from "../Component/SIngleMoviePage";
+import UserSettings from "../Component/User/UserSetting";
 export const MAIN_PATH = {
     publicRoutes: {
         LOGIN: {
@@ -64,12 +64,12 @@ export const MAIN_PATH = {
             },
             children: [
                 {
-                    path: "/user-setting",
-                    element: <UserSetting />,
+                    path: "/setting/user-setting",
+                    element: <UserSettings />,
                     pageName: "User Setting",
                 },
                 {
-                    path: "/user-profile",
+                    path: "/setting/user-profile",
                     element: <UserProfile />,
                     pageName: "Profile Setting",
                 },

@@ -58,44 +58,45 @@ const Sidebar = () => {
                         <div className="btn btn-primary" onClick={ToggleSidebar}><i className="fa fa-times"></i></div>
                     </div>
                     <div className="sd-body">
+                        {Object.values(MAIN_PATH.privateRoutes).map((ele) => {
+                            console.log(ele.children)
+                            if (ele.children) {
+                                return (
+                                    <li key={ele.path} className="innerLink">
+                                        <span
+                                            className={`mainLinkNav ${openDropdown === ele.pageName ? 'active' : ''}`}
+                                            onClick={() => toggleSettingsDropdown(ele.pageName)}
+                                        >
+                                            {ele.pageName}
+                                        </span>
+                                        {openDropdown === ele.pageName && (
+                                            <ul className="user-settings-dropdown">
+                                                {Object.values(ele.children).map((child) => (
+                                                    <li key={child.path}>
+                                                        <NavLink
+                                                            className="linksDrop"
+                                                            to={child.path}
+                                                            onClick={closeSettingsDropdown}
+                                                        >
+                                                            {child.pageName}
+                                                        </NavLink>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        )}
+                                    </li>
+                                );
+                            } else {
+                                return (
+                                    <li key={ele.path}>
+                                        <Link className='mainLinkNav' to={ele.path}>{ele.pageName}</Link>
+                                    </li>
+                                );
+                            }
+                        })}
+                        <Link className='mainLinkNav' onClick={() => localStorage.clear()} to='/login'>Logout</Link>
                         <ul>
-                            {/* {Object.values(MAIN_PATH).map((ele) => {
-                                if (ele.children) {
-                                    return (
-                                        <li key={ele.path} className="innerLink">
-                                            <span
-                                                className={`mainLinkNav ${openDropdown === ele.pageName ? 'active' : ''}`}
-                                                onClick={() => toggleSettingsDropdown(ele.pageName)}
-                                            >
-                                                {ele.pageName}
-                                            </span>
-                                            {openDropdown === ele.pageName && (
-                                                <ul className="user-settings-dropdown">
-                                                    {Object.values(ele.children).map((child) => (
-                                                        <li key={child.path}>
-                                                            <Link
-                                                                className="linksDrop"
-                                                                to={child.path}
-                                                                onClick={closeSettingsDropdown}
-                                                            >
-                                                                {child.pageName}
-                                                            </Link>
-                                                        </li>
-                                                    ))}
-                                                  
-                                                </ul>
-                                            )}
-                                        </li>
-                                    );
-                                } else {
-                                    return (
-                                        <li key={ele.path}>
-                                            <Link className='mainLinkNav' to={ele.path}>{ele.pageName}</Link>
-                                        </li>
-                                    );
-                                }
-                            })} */}
-                            {sideBarNavigation
+                            {/* {sideBarNavigation
                                 .map((data) => {
                                     return (
                                         <>
@@ -105,17 +106,17 @@ const Sidebar = () => {
                                                 state={{ previousPath: location.pathname }}
                                             >
                                                 <div>
-                                                    <p>{data.pageName}</p>
-                                                    <i
-                                                        className="fa-solid fa-arrow-right"
-                                                    ></i>
+                                                    <p
+                                                        className="linksDrop"
+                                                        onClick={closeSettingsDropdown}
+                                                    >{data.pageName}</p>
                                                 </div>
                                             </NavLink>
                                         </>
                                     )
                                 })
                             }
-                            <Link className='mainLinkNav' onClick={() => localStorage.clear()} to='/login'>Logout</Link>
+                            <Link className='mainLinkNav' onClick={() => localStorage.clear()} to='/login'>Logout</Link> */}
                         </ul>
                     </div>
                 </div>
