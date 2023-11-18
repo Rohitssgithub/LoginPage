@@ -201,7 +201,6 @@ const About = () => {
     });
   };
 
-  console.log('visible', visible)
   return (
     <>
       <div className='row'>

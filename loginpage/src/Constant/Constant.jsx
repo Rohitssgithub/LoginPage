@@ -8,6 +8,7 @@ import About from "../Page/About/About";
 import UserSetting from "../Component/setting/UserSetting";
 import Setting from "../Component/setting/Setting";
 import UserProfile from "../Component/User/UserProfile";
+import SingleMoviePage from "../Component/SIngleMoviePage";
 export const MAIN_PATH = {
     publicRoutes: {
         LOGIN: {
@@ -47,6 +48,12 @@ export const MAIN_PATH = {
             sidebar: {
                 show: true,
             }
+        },
+        SINGLE_MOVIE_ID:{
+            path: "/single/movie/:id",
+            element: <SingleMoviePage />,
+            pageName: "Single Movie",
+            
         },
         SETTING:{
             path: "/setting",
