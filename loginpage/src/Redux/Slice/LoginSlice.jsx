@@ -16,7 +16,7 @@ export const userLogin = createAsyncThunk("userLogin", async (data, { rejectWith
         return userData;
     }
     catch (err) {
-        console.log('error')
+        // console.log('error')
         toast.error('User Not Found')
     }
 });
